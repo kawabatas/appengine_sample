@@ -12,19 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "../app.rb"
-require "rspec"
-require "rack/test"
+# [START gae_flex_quickstart_yaml]
+runtime: custom
+service: default
+env: flex
+# entrypoint: bundle exec ruby app.rb
+env_variables:
+  STAGE: prod
 
-describe "Hello World" do
-  include Rack::Test::Methods
+# This sample incurs costs to run on the App Engine flexible environment.
+# The settings below are to reduce costs during testing and are not appropriate
+# for production use. For more information, see:
+# https://cloud.google.com/appengine/docs/flexible/ruby/configuring-your-app-with-app-yaml
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
 
-  def app
-    Sinatra::Application
-  end
-
-  it "displays hello world text" do
-    get "/"
-    expect(last_response.body).to eq("Hello world!")
-  end
-end
+# [END gae_flex_quickstart_yaml]
