@@ -17,5 +17,5 @@ COPY Gemfile* ./
 RUN bundle install
 
 COPY . .
-EXPOSE 80
+EXPOSE 8080
 CMD ["bundle", "exec", "ruby", "app.rb"]
